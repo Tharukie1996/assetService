@@ -2,12 +2,7 @@ package com.project.eutech.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.List;
-import java.util.Map;
-
 public class EquipmentDTO {
-
-//    private List<Map<String,String>> equipmentDataList;
 
     @JsonProperty("AssetID")
     private String assetId;
@@ -19,23 +14,11 @@ public class EquipmentDTO {
     public EquipmentDTO() {
     }
 
-//    public EquipmentDTO(List<Map<String, String>> equipmentDataList) {
-//        this.equipmentDataList = equipmentDataList;
-//    }
-//
     public EquipmentDTO(String assetId, String operationalStatus, String assetCategory) {
         this.assetId = assetId;
         this.operationalStatus = operationalStatus;
         this.assetCategory = assetCategory;
     }
-
-//    public List<Map<String, String>> getEquipmentDataList() {
-//        return equipmentDataList;
-//    }
-//
-//    public void setEquipmentDataList(List<Map<String, String>> equipmentDataList) {
-//        this.equipmentDataList = equipmentDataList;
-//    }
 
     public String getAssetId() {
         return assetId;

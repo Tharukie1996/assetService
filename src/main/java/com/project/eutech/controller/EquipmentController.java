@@ -5,12 +5,14 @@ import com.project.eutech.dto.StatisticDTO;
 import com.project.eutech.service.EquipmentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v1")
 public class EquipmentController {
@@ -22,7 +24,7 @@ public class EquipmentController {
         this.equipmentService = equipmentService;
     }
 
-    @GetMapping("/equipmentStat")
+    @GetMapping("/equipment/stat")
     public ResponseEntity<StatisticDTO> populateDashboard() throws JsonProcessingException {
         return new ResponseEntity<>(equipmentService.getTableData(), HttpStatus.OK);
     }

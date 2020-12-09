@@ -3,4 +3,4 @@ server:
   address: localhost
 
 eutech:
-  apikey: "SC:demo:64a9aa122143a5db"
+  apikey: "apikey"

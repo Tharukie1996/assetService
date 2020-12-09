@@ -39,14 +39,14 @@ public class EquipmentService {
 
 
         HashMap<String, Integer> equipmentCountMap = new HashMap<>();
-        StatisticDTO statisticDTO = new StatisticDTO(0, 0, equipmentCountMap);
+        StatisticDTO statisticDTO = new StatisticDTO(0, 0);
 
         equipmentDTOList.forEach(e -> {
-            if(statisticDTO.getEquipStatMap().containsKey(e.getAssetCategory())) {
-                statisticDTO.getEquipStatMap().put(e.getAssetCategory(), statisticDTO.getEquipStatMap().get(e.getAssetCategory())+1);
+            if(equipmentCountMap.containsKey(e.getAssetCategory())) {
+                equipmentCountMap.put(e.getAssetCategory(), equipmentCountMap.get(e.getAssetCategory())+1);
             }
             else {
-                statisticDTO.getEquipStatMap().put(e.getAssetCategory(), 1);
+                equipmentCountMap.put(e.getAssetCategory(), 1);
             }
             if (e.getOperationalStatus().equals(OPERATIONAL)) {
                 statisticDTO.setNoOfOperationalEquip(statisticDTO.getNoOfOperationalEquip() + 1);
@@ -54,6 +54,7 @@ public class EquipmentService {
                 statisticDTO.setNoOfNonOperationalEquip(statisticDTO.getNoOfNonOperationalEquip() + 1);
             }
         });
+        statisticDTO.convertMapToList(equipmentCountMap);
         return statisticDTO;
     }
 

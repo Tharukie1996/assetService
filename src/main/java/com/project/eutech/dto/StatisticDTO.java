@@ -1,5 +1,8 @@
 package com.project.eutech.dto;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,15 +14,18 @@ public class StatisticDTO {
 
     private int noOfNonOperationalEquip;
 
-    private Map<String, Integer> equipStatMap;
+    private List<EquipmentDetailsDTO> equipmentStatList;
+
+    private List<String> labelList;
+
+    private List<Integer> dataList;
 
     public StatisticDTO() {
     }
 
-    public StatisticDTO(int noOfOperationalEquip, int noOfNonOperationalEquip, Map<String, Integer> equipStatMap) {
+    public StatisticDTO(int noOfOperationalEquip, int noOfNonOperationalEquip) {
         this.noOfOperationalEquip = noOfOperationalEquip;
         this.noOfNonOperationalEquip = noOfNonOperationalEquip;
-        this.equipStatMap = equipStatMap;
     }
 
     public int getNoOfOperationalEquip() {
@@ -38,11 +44,42 @@ public class StatisticDTO {
         this.noOfNonOperationalEquip = noOfNonOperationalEquip;
     }
 
-    public Map<String, Integer> getEquipStatMap() {
-        return equipStatMap;
+    public List getEquipmentStatList() {
+        return equipmentStatList;
     }
 
-    public void setEquipStatMap(Map<String, Integer> equipStatMap) {
-        this.equipStatMap = equipStatMap;
+    public void setEquipmentStatList(List<EquipmentDetailsDTO> equipmentStatList) {
+        this.equipmentStatList = equipmentStatList;
+    }
+
+    public List<String> getLabelList() {
+        return labelList;
+    }
+
+    public void setLabelList(List<String> labelList) {
+        this.labelList = labelList;
+    }
+
+    public List<Integer> getDataList() {
+        return dataList;
+    }
+
+    public void setDataList(List<Integer> dataList) {
+        this.dataList = dataList;
+    }
+
+    public void convertMapToList(Map<String, Integer> mapToConvert) {
+        ArrayList<EquipmentDetailsDTO> arrayList = new ArrayList<>();
+        ArrayList<String> labelArrList = new ArrayList<>();
+        ArrayList<Integer> dataArrList = new ArrayList<>();
+        mapToConvert.forEach((k,v) -> {
+            EquipmentDetailsDTO equipmentDetailsDTO = new EquipmentDetailsDTO(k, v);
+            arrayList.add(equipmentDetailsDTO);
+            labelArrList.add(k);
+            dataArrList.add(v);
+        });
+        this.setEquipmentStatList(arrayList);
+        this.setLabelList(labelArrList);
+        this.setDataList(dataArrList);
     }
 }
