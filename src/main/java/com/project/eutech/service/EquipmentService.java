@@ -16,6 +16,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
 
+/**
+ * This is the service layer of the application
+ */
 @Service
 public class EquipmentService {
 

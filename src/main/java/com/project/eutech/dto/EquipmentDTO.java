@@ -2,12 +2,18 @@ package com.project.eutech.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * This DTO is used to map the necessary equipment details receiving from ivava end point
+ */
+
 public class EquipmentDTO {
 
     @JsonProperty("AssetID")
     private String assetId;
+
     @JsonProperty("OperationalStatus")
     private String operationalStatus;
+
     @JsonProperty("AssetCategoryID")
     private String assetCategory;
 

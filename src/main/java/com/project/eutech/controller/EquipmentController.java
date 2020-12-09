@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
 
+/**
+ * This is the controller where you can find the end point used to retrieve necessary data for the dashboard
+ */
+
 @CrossOrigin
 @RestController
 @RequestMapping("/api/v1")
