@@ -13,8 +13,6 @@ public class StatisticDTO {
 
     private int noOfNonOperationalEquip;
 
-    private List<EquipmentDetailsDTO> equipmentStatList;
-
     private List<String> labelList;
 
     private List<Integer> dataList;
@@ -43,14 +41,6 @@ public class StatisticDTO {
         this.noOfNonOperationalEquip = noOfNonOperationalEquip;
     }
 
-    public List getEquipmentStatList() {
-        return equipmentStatList;
-    }
-
-    public void setEquipmentStatList(List<EquipmentDetailsDTO> equipmentStatList) {
-        this.equipmentStatList = equipmentStatList;
-    }
-
     public List<String> getLabelList() {
         return labelList;
     }
@@ -77,7 +67,6 @@ public class StatisticDTO {
             labelArrList.add(k);
             dataArrList.add(v);
         });
-        this.setEquipmentStatList(arrayList);
         this.setLabelList(labelArrList);
         this.setDataList(dataArrList);
     }

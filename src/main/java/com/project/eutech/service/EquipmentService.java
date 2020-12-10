@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.eutech.dto.EquipmentDTO;
 import com.project.eutech.dto.StatisticDTO;
 import com.project.eutech.error.ApiException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -22,6 +24,8 @@ import java.util.*;
 @Service
 public class EquipmentService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(EquipmentService.class);
+
     @Value("${eutech.apikey}")
     private String apikey;
 
@@ -35,10 +39,15 @@ public class EquipmentService {
 
         List<EquipmentDTO> equipmentDTOList = new ArrayList<>();
 
-        for (int i = 0; i < 300; i=i+max) {
-            List<EquipmentDTO> returnedDTOList = getEquipmentDetails(i);
+        int count = 0;
+        int receivedCount = 0;
+        do {
+            List<EquipmentDTO> returnedDTOList = getEquipmentDetails(count);
             equipmentDTOList.addAll(returnedDTOList);
-        }
+            receivedCount = returnedDTOList.size();
+            LOGGER.debug("Received equipment count: {}", receivedCount);
+            count = count + 100;
+        } while(receivedCount == 100);
 
 
         HashMap<String, Integer> equipmentCountMap = new HashMap<>();
@@ -73,7 +82,7 @@ public class EquipmentService {
         if (!responseEntity.getStatusCode().is2xxSuccessful()) {
             throw new ApiException("Error occurred when retrieving data with the status code: ", responseEntity.getStatusCode());
         }
-
+        LOGGER.info("Received successful response: {}", responseEntity);
         final ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.disable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
         objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
